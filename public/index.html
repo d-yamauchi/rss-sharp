@@ -14,12 +14,12 @@
 <body>
   <div id="application" v-cloak>
     <div id="main">
-      <div v-for="item in items" :class="'item'">
+      <div v-for="item in items" class="item" :class="{unread: item.unread}" @mouseenter="item.unread = false">
         <div>
           <a :href="item.hatenaUrl" target="_blank">
             <span class="hatena">B!</span>
           </a>
-          <span class="site">{{ item.siteName }}</span>
+          <span class="site">{{item.siteName}}</span>
         </div>
         <a :href="item.url" target="_blank">{{ item.title }}</a>
       </div>
