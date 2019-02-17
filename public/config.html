@@ -21,7 +21,7 @@
       <p id="config-input-error">{{errorMessage}}</p>
     </div>
     <div class="rss-config" v-for="site in sites">
-      <div class="rss-config-delete">×</div>
+      <div class="rss-config-delete" @click="remove(site.id)">×</div>
       <div class="rss-config-content">
         {{ site.name }}<br>
         <span class="rss-config-url">{{ site.url }}</span>

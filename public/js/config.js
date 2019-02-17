@@ -20,6 +20,16 @@ const app = new Vue({
         this.errorMessage = "エラー";
       }
     },
+    async remove(siteId) {
+      this.errorMessage = "";
+      const response = await fetch(`sites/${siteId}`, { method: "DELETE" });
+      const result = await response.json();
+      if (result.error === false) {
+        window.location.reload();
+      } else {
+        this.errorMessage = "エラー";
+      }
+    }
   },
   created: async function () {
     const response = await fetch("sites");

@@ -34,6 +34,24 @@ class SitesController < ApplicationController
     end
   end
 
+  def destroy
+    # パラメータが無いときにエラーにする
+    if params['id'] then
+      id = params['id']
+    else
+      render json: error(1)
+      return
+    end
+
+    targetSite = Site.find id
+    targetSite.enabled = false
+    if targetSite.save then
+      render json: {error: false}
+    else
+      render json: error(2)
+    end
+  end
+
   private
   def error(code)
     {error: true, code: code}
