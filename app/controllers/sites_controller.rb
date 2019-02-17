@@ -16,15 +16,20 @@ class SitesController < ApplicationController
 
     # 新規追加ならinsert
     # 過去に無効化したサイトならupdate
-    disabledSite = Site.find_by enabled: false, url: url
-    if disabledSite then
+    disabled_site = Site.find_by enabled: false, url: url
+    if disabled_site then
       # update
-      disabledSite.enabled = true
-      site = disabledSite
+      disabled_site.enabled = true
+      site = disabled_site
     else
       # insert
-      name = "hoge"
-      site = Site.new(name: name, url: url, enabled: true)
+      begin
+        rss_data = RssService.new.fetch url
+        name = rss_data.channel.title
+        site = Site.new(name: name, url: url, enabled: true)
+      rescue => e
+        render json: error(3)
+      end
     end
 
     if site.save then
@@ -43,9 +48,9 @@ class SitesController < ApplicationController
       return
     end
 
-    targetSite = Site.find id
-    targetSite.enabled = false
-    if targetSite.save then
+    target_site = Site.find id
+    target_site.enabled = false
+    if target_site.save then
       render json: {error: false}
     else
       render json: error(2)
@@ -53,6 +58,7 @@ class SitesController < ApplicationController
   end
 
   private
+
   def error(code)
     {error: true, code: code}
   end
