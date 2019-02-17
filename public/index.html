@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>RSS#</title>
+  <link href="https://fonts.googleapis.com/earlyaccess/sawarabigothic.css" rel="stylesheet" />
+  <link rel="stylesheet" href="css/main.css">
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+  <div id="application">
+    <div id="main">
+      <div v-for="item in items" :class="'item'">
+        <div>
+          <a :href="item.hatenaUrl" target="_blank">
+            <span class="hatena">B!</span>
+          </a>
+          <span class="site">{{ item.siteName }}</span>
+        </div>
+        <a :href="item.url" target="_blank">{{ item.title }}</a>
+      </div>
+    </div>
+    <div class="footer">
+      <span id="update-time">最終更新日時：{{getDateString(lastUpdateDate)}}</span>
+      <span class="config"><a href="config.html">設定</a></span>
+    </div>
+  </div>
+  <script src="js/main.js"></script>
+</body>
+</html>
