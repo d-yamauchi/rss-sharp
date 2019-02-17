@@ -15,4 +15,3 @@ ADD Gemfile.lock ./Gemfile.lock
 # gemfileのinstall
 RUN bundle install
 ADD . .
-

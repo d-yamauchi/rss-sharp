@@ -9,6 +9,7 @@ services:
       - '3316:3306'
     volumes:
       - ./db/mysql/volumes:/var/lib/mysql
+      - ./mysqlconfig:/etc/mysql/conf.d
 
 
   web:

@@ -12,7 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2019_02_17_040150) do
 
-  create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.bigint "site_id", null: false
     t.string "title", null: false
     t.string "url", null: false
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2019_02_17_040150) do
     t.index ["site_id"], name: "index_items_on_site_id"
   end
 
-  create_table "sites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "sites", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC", force: :cascade do |t|
     t.string "name", null: false
     t.string "url", null: false
     t.boolean "enabled", null: false
