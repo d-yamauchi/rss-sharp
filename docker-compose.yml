@@ -14,7 +14,7 @@ services:
 
   web:
     build: .
-    command: bundle exec rails s -p 3000 -b '0.0.0.0'
+    command: bash -c "bundle exec whenever --update-crontab && cron -f && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/Users/d-yamauchi/Documents/apps/rss-sharp
     ports:

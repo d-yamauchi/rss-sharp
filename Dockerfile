@@ -5,6 +5,7 @@ RUN apt-get update -qq
 RUN apt-get install -y build-essential
 RUN apt-get install -y libpq-dev
 RUN apt-get install -y nodejs
+RUN apt-get install -y cron
 
 WORKDIR /Users/d-yamauchi/Documents/apps/rss-sharp
 

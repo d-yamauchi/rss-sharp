@@ -1,13 +1,15 @@
+require "date"
+
 class FetchRssJob < ApplicationJob
   queue_as :default
 
   def perform(*args)
-    p "更新処理を開始します。"
+    log "更新処理を開始します。"
 
     newItems = []
     sites = Site.where enabled: true
     sites.each do |site|
-      p "#{site.name}を取得します。"
+      log "#{site.name}を取得します。"
 
       oldItems = Item.where({site_id: site.id}).reverse
 
@@ -23,7 +25,13 @@ class FetchRssJob < ApplicationJob
 
     Item.import newItems
 
-    p "#{newItems.length}件更新しました。"
-    p "更新処理を終了します。"
+    log "#{newItems.length}件更新しました。"
+    log "更新処理を終了します。"
+  end
+
+  private
+
+  def log(text)
+    p "[#{DateTime.now}] #{text}"
   end
 end
