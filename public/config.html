@@ -16,13 +16,13 @@
     <h1>設定</h1>
     <a href="index.html">←戻る</a>
     <div id="config-input">
-      <input type="text" placeholder="RSS URL">
-      <button>追加</button>
-      <p id="config-input-error"></p>
+      <input type="text" placeholder="RSS URL" v-model="newUrl">
+      <button @click="add(newUrl)">追加</button>
+      <p id="config-input-error">{{errorMessage}}</p>
     </div>
-    <div class="rss-config">
+    <div class="rss-config" v-for="site in sites">
       <div class="rss-config-delete">×</div>
-      <div v-for="site in sites" class="rss-config-content">
+      <div class="rss-config-content">
         {{ site.name }}<br>
         <span class="rss-config-url">{{ site.url }}</span>
       </div>
