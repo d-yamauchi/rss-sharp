@@ -24,8 +24,9 @@
 
         this.lastUpdateDate = new Date();
 
-        // 最後までスクロールする
-        scrollTo(0, window.document.body.offsetHeight);
+        // 最後までスクロールする。
+        // すぐだとスクロールされなかったので、1秒待ってからスクロールする。
+        setTimeout(() => scrollTo(0, window.document.body.offsetHeight), 1000);
       },
       getDateString(date) {
         return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
