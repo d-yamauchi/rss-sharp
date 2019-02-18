@@ -16,7 +16,7 @@
 
         const items = json.items;
         for (const item of items) {
-          const site = json.sites.find(site => site.id = item.site_id);
+          const site = json.sites.find(site => site.id === item.site_id);
           item.siteName = site.name;
           item.hatenaUrl = `http://b.hatena.ne.jp/entry/${item.url}`;
         }
