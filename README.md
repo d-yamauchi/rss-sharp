@@ -1,24 +1,22 @@
-# README
+# RSS#
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+RSSリーダーです。
+Ruby on Railsの勉強のために作りました。
 
-Things you may want to cover:
+## 使い方
+```
+docker-compose run web rails new . --force --database=mysql
+docker-compose build
 
-* Ruby version
+# サーバー起動
+docker-compose up
 
-* System dependencies
+# データベースの用意（初回のみ）
+docker-compose run web rake db:create
 
-* Configuration
+# 画面を開く
+http://localhost:3000/ にアクセス
 
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+# サーバー停止
+docker-compose down
+```
