@@ -1,5 +1,5 @@
 {
-  const UPDATE_INTERVAL = 5 * 60 * 1000;
+  const UPDATE_INTERVAL = 10 * 60 * 1000;
 
   const firstTime = new Date();
   firstTime.setDate(firstTime.getDate() - 1);
