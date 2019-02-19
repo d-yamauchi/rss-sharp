@@ -1,5 +1,6 @@
 {
   const UPDATE_INTERVAL = 10 * 60 * 1000;
+  const MAX_ITEM_COUNT = 200;
 
   const firstTime = new Date();
   firstTime.setDate(firstTime.getDate() - 1);
@@ -23,6 +24,11 @@
         this.items.push(...json.items);
 
         this.lastUpdateDate = new Date();
+
+        if (this.items.length > MAX_ITEM_COUNT) {
+          const overCount = this.items.length - MAX_ITEM_COUNT;
+          this.items.splice(0, overCount);
+        }
 
         // 最後までスクロールする。
         // すぐだとスクロールされなかったので、1秒待ってからスクロールする。
