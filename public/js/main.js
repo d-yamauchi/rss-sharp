@@ -1,6 +1,9 @@
 {
   const UPDATE_INTERVAL = 10 * 60 * 1000;
   const MAX_ITEM_COUNT = 200;
+  const SEND_UNREAD_INTERBAL = 5000;
+
+  const sleep = async ms => new Promise(r => setTimeout(r, ms));
 
   const firstTime = new Date();
   firstTime.setDate(firstTime.getDate() - 1);
@@ -9,6 +12,8 @@
     data: {
       lastUpdateDate: firstTime,
       items: [],
+      unreadItems: [],
+      isPendingUnreadSend: false,
     },
     methods: {
       async update() {
@@ -36,6 +41,34 @@
       },
       getDateString(date) {
         return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${date.getSeconds()}`;
+      },
+      setAsRead(item) {
+        if (!item.unread) {
+          return;
+        }
+
+        item.unread = false;
+        this.unreadItems.push(item);
+        this.sendUnread();
+      },
+      async sendUnread() {
+        if (this.isPendingUnreadSend) {
+          return;
+        }
+
+        if (this.unreadItems.length === 0) {
+          return;
+        }
+
+        await sleep(SEND_UNREAD_INTERBAL);
+
+        this.isPendingUnreadSend = true;
+        const targetUnreadItems = this.unreadItems.splice(0);
+
+        await fetch(`items/?items=${targetUnreadItems.map(item => item.id).join(",")}`, {method: "PATCH"});
+
+        this.isPendingUnreadSend = false;
+        this.sendUnread();
       }
     },
   });

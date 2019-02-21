@@ -14,7 +14,7 @@
 <body>
   <div id="application" v-cloak>
     <div id="main">
-      <div v-for="item in items" class="item" :class="{unread: item.unread}" @mouseenter="item.unread = false">
+      <div v-for="item in items" class="item" :class="{unread: item.unread}" @mouseenter="setAsRead(item)">
         <div>
           <a :href="item.hatenaUrl" target="_blank">
             <span class="hatena">B!</span>
